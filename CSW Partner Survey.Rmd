@@ -1,0 +1,58 @@
+---
+title: "CSW Partner Survey"
+author: "Christine Vandenberghe"
+date: "31/03/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Online versions of the Community Social Work (CSW) Partner Survey were emailed by Research and Reporting to Partners identified on CSW Spreadsheets on November 29, 2020. A reminder to complete the survey was provided on December 10, with the survey closing December 31. 
+
+## Who Completed the Survey
+
+- One hundred and eleven Partners responded out of a total of 351 Partners listed on CSW Spreadsheets, for a **response rate** of *32%*.
+- Fifteen Hub Partners responded out of a total of 98 Hub Partners listed on CSW Spreadsheets, for a **response rate** of *15%*.
+
+
+```{r}
+library(tidyverse)
+library(janitor)
+```
+```{r}
+X2020_CSW_Partner_Survey <- read_csv("X2020_CSW_Partner_Survey.csv")
+```
+
+```{r}
+X2020_CSW_Partner_Survey %>%
+  tabyl(Q3,Q5) %>% 
+  adorn_percentages(c("row","col")) %>% 
+  adorn_pct_formatting(digits=0,rounding = "half up") %>% 
+  adorn_ns() %>% 
+  adorn_title(placement = "combined")
+```
+
+```{r}
+X2020_CSW_Partner_Survey %>%
+  count(Q9R1) %>% 
+  arrange(desc(n))
+```
+
+```{r}
+X2020_CSW_Partner_Survey %>%
+  summarize(mean_time_taken = mean(Time_Taken))
+```
+
+```{r}
+
+ggplot(data = X2020_CSW_Partner_Survey,
+       mapping = aes(x = Q3,
+                     y = Q4,
+                     fill=Q4)) +
+  geom_bar(stat = "identity")+
+  coord_flip()
+```
