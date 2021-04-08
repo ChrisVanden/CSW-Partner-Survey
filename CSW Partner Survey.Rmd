@@ -3,6 +3,8 @@ title: "CSW Partner Survey"
 author: "Christine Vandenberghe"
 date: "31/03/2021"
 output: word_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -56,3 +58,16 @@ ggplot(data = X2020_CSW_Partner_Survey,
   geom_bar(stat = "identity")+
   coord_flip()
 ```
+
+```{r}
+X2020_CSW_Partner_Survey %>% 
+  select(Q3, Q4) %>% 
+  count(Q3, Q4) %>% 
+  ggplot(aes(x = n,
+             y = Q3,
+             fill = Q4)) +
+  geom_col()
+```
+
+
+
