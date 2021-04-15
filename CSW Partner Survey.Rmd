@@ -66,7 +66,11 @@ X2020_CSW_Partner_Survey %>%
   ggplot(aes(x = n,
              y = Q3,
              fill = Q4)) +
-  geom_col()
+  geom_col(show.legend = FALSE)+
+  labs(title = "Type of Partner by Community",
+       subtitle = "Most respondents were Service Providers who worked in multiple communities.",
+       x="Number of Communities",
+       y="Partner Type")
 ```
 
 
